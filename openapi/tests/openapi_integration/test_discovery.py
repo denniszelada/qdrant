@@ -1,23 +1,23 @@
 import math
-import random
 
 import pytest
 
 from .helpers.collection_setup import basic_collection_setup, drop_collection
 from .helpers.helpers import request_with_validation
+import secrets
 
 collection_name = "test_discovery"
 
 
 def random_vector(dim=4):
-    return [random.random() for _ in range(dim)]
+    return [secrets.SystemRandom().random() for _ in range(dim)]
 
 
 def random_example(dim=4, min_id=1, max_id=8):
-    if random.random() < 0.5:
+    if secrets.SystemRandom().random() < 0.5:
         return random_vector(dim)
     else:
-        return random.randint(min_id, max_id)
+        return secrets.SystemRandom().randint(min_id, max_id)
 
 
 def count_ids_in_examples(context, target) -> int:

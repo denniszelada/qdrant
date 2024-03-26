@@ -6,6 +6,7 @@ import pytest
 
 from .helpers.helpers import request_with_validation
 from .helpers.collection_setup import basic_collection_setup, drop_collection
+from security import safe_command
 
 collection_name = 'test_collection_timeout'
 num_vectors = 200000
@@ -33,7 +34,7 @@ def setup():
     )
     assert response.ok
     
-    subprocess.run(['bfb', '--collection-name', collection_name, '--skip-create', '--dim', str(dims), '--num-vectors', str(num_vectors), '--keywords', '300'])
+    safe_command.run(subprocess.run, ['bfb', '--collection-name', collection_name, '--skip-create', '--dim', str(dims), '--num-vectors', str(num_vectors), '--keywords', '300'])
     
     yield
     drop_collection(collection_name=collection_name)

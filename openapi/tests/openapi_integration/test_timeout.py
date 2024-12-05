@@ -1,11 +1,11 @@
 
 import os
-from random import random
 import subprocess
 import pytest
 
 from .helpers.helpers import request_with_validation
 from .helpers.collection_setup import basic_collection_setup, drop_collection
+import secrets
 
 collection_name = 'test_collection_timeout'
 num_vectors = 200000
@@ -45,7 +45,7 @@ def test_search_timeout():
         path_params={'collection_name': collection_name},
         query_params={'timeout': 1},
         body={
-            "vector": [random() for _ in range(dims)],
+            "vector": [secrets.SystemRandom().random() for _ in range(dims)],
             "limit": 100000,
             "filter": {
                 "must": [

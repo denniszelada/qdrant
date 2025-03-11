@@ -1,9 +1,9 @@
-import random
 
 import pytest
 
 from .helpers.collection_setup import drop_collection
 from .helpers.helpers import request_with_validation
+import secrets
 
 collection_name = 'test_collection_fts'
 
@@ -208,7 +208,7 @@ def basic_collection_setup(
             "points": [
                 {
                     "id": idx,
-                    "vector": [random.random() for _ in range(4)],
+                    "vector": [secrets.SystemRandom().random() for _ in range(4)],
                     "payload": {"title": title}
                 } for idx, title in enumerate(texts)
             ]

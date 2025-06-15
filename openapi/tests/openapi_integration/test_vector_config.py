@@ -1,9 +1,9 @@
-import random
 from time import sleep
 import pytest
 
 from .helpers.helpers import request_with_validation
 from .helpers.collection_setup import drop_collection
+import secrets
 
 collection_name = 'test_collection'
 
@@ -225,7 +225,7 @@ def test_disable_indexing(on_disk_vectors):
 
 def insert_vectors(collection_name='test_collection', count=2000, size=256):
     ids = [x for x in range(count)]
-    vectors = [[random.random() for _ in range(size)] for _ in range(count)]
+    vectors = [[secrets.SystemRandom().random() for _ in range(size)] for _ in range(count)]
 
     batch_size = 1000
     start = 0
